@@ -1,8 +1,11 @@
 # ADR 0001: MVT com camada de service e views baseadas em `View`
 
-- **Status:** Proposto
+- **Status:** Substituído em 2026-11-23
+- **Substituído por:** [ADR 0005 — Stack Java 21 + Spring Boot 3](0005-stack-java-spring-boot.md) e [ADR 0006 — Arquitetura modular em camadas](0006-arquitetura-em-camadas.md)
 - **Data:** 2026-11-16
-- **PRD:** [PRD 0001](../prd/0001-elovital.md)
+- **PRD:** [PRD 0001](../prd/0001-detalhamento-prd-e-adrs.md)
+
+> **Documento histórico.** Escrito para a implementação de referência em Django/Python. Com a decisão de produção em Java 21 + Spring Boot 3, a estrutura MVT deixa de valer. O princípio que permanece — regra de negócio fora da camada HTTP, em services testáveis — está em [ADR 0006](0006-arquitetura-em-camadas.md).
 
 ## Contexto
 

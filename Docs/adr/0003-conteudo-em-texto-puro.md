@@ -1,8 +1,11 @@
 # ADR 0003: Conteúdo de texto puro
 
-- **Status:** Proposto
+- **Status:** Substituído em 2026-11-23
+- **Substituído por:** [ADR 0009 — Conteúdo em texto puro e validação](0009-conteudo-texto-puro-e-validacao.md)
 - **Data:** 2026-11-16
-- **PRD:** [PRD 0001](../prd/0001-elovital.md)
+- **PRD:** [PRD 0001](../prd/0001-detalhamento-prd-e-adrs.md)
+
+> **Documento histórico.** A decisão de texto puro permanece e foi ampliada para validação centralizada, normalização e detecção de conteúdo proibido no [ADR 0009](0009-conteudo-texto-puro-e-validacao.md). As referências a `mark_safe` e ao autoescape do Django valem apenas como histórico.
 
 ## Contexto
 
@@ -15,7 +18,7 @@ Aceitar HTML ou Markdown permitiria formatação, mas exigiria sanitização e u
 - Todo conteúdo enviado por usuários é armazenado e exibido como texto puro.
 - A exibição usa o autoescape do Django e, quando necessário, o filtro `linebreaks` para transformar quebras de linha em parágrafos.
 - `safe`, `mark_safe`, `autoescape off` e equivalentes não são usados em conteúdo de usuário.
-- Os limites de tamanho do Documento de Requisitos são validados no formulário e no service: 80 caracteres para título de solicitação, 300 para comentário de avaliação, 500 para justificativa, 1.000 para descrição e mensagem, conforme cada caso.
+- Os limites de tamanho do Documento de Requisitos são validados no formulário e no service: 120 para nome, 200 para e-mail, 100 para condição não listada, 300 para limitações e comentário de avaliação, 200 para observações do horário, 500 para observações de cuidado, justificativa e denúncia, 1.000 para descrição e mensagem, 80 para título de solicitação, conforme cada caso.
 - Não há anexos, imagens, áudios ou chamadas no chat na primeira versão.
 - Foto de perfil e documentos de verificação não são conteúdo rico: são arquivos validados por tipo e tamanho, armazenados em bucket privado, com acesso por URL assinada de curta duração.
 - Links digitados pelo usuário não são transformados em âncoras clicáveis.

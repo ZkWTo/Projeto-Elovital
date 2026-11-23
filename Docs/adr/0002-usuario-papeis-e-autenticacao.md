@@ -1,9 +1,12 @@
 # ADR 0002: Usuário customizado, papéis e autenticação própria
 
-- **Status:** Proposto
+- **Status:** Substituído em 2026-11-23
+- **Substituído por:** [ADR 0008 — Usuário, papéis, autenticação e sessão com Spring Security](0008-seguranca-autenticacao-e-papeis.md)
 - **Data:** 2026-11-16
-- **PRD:** [PRD 0001](../prd/0001-elovital.md)
+- **PRD:** [PRD 0001](../prd/0001-detalhamento-prd-e-adrs.md)
 - **Relacionado:** [ADR 0004](0004-supabase-postgresql.md)
+
+> **Documento histórico.** Escrito para Django. O modelo de conta única por CPF, os três papéis, os cinco estados de conta, o CPF em hash + cifra e a recusa ao Supabase Auth continuam válidos e foram transportados para o [ADR 0008](0008-seguranca-autenticacao-e-papeis.md), agora com Spring Security.
 
 ## Contexto
 

@@ -1,10 +1,13 @@
 # ADR 0004: Supabase (PostgreSQL) como banco de dados
 
-- **Status:** Proposto
+- **Status:** Substituído em 2026-11-23
+- **Substituído por:** [ADR 0007 — Persistência com PostgreSQL, JPA e Flyway](0007-persistencia-postgresql-jpa-flyway.md)
 - **Data:** 2026-11-16
-- **PRD:** [PRD 0001](../prd/0001-elovital.md)
+- **PRD:** [PRD 0001](../prd/0001-detalhamento-prd-e-adrs.md)
 - **Proposta detalhada:** [Banco Supabase](../propostas/banco-supabase/README.md)
-- **Substitui:** decisão de SQLite do projeto de referência ([ADR 0004 do labiv20262](../../../Modelo%20Wagner/labiv20262/docs/adr/0004-sqlite-como-banco-de-dados.md))
+- **Substitui:** decisão de SQLite do projeto de referência (ADR 0004 do labiv20262, fora deste repositório)
+
+> **Documento histórico.** A decisão de banco (PostgreSQL gerenciado no Supabase, `sa-east-1`, papéis, RLS, Storage) continua válida. O que muda é o cliente: sai o ORM/migrations do Django e entra Spring Data JPA + Flyway, conforme o [ADR 0007](0007-persistencia-postgresql-jpa-flyway.md). A [proposta de banco](../propostas/banco-supabase/README.md) permanece a referência de schema e segurança.
 
 ## Contexto
 
