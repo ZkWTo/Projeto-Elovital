@@ -1,17 +1,17 @@
 # Projeto-Elovital
 
- = Detalhamento do projeto =
+ Detalhamento do projeto 
 
 ## Como o projeto foi construído
 
-O EloVital é uma plataforma web gratuita de rede de apoio a pessoas com doenças
+- O EloVital é uma plataforma web gratuita de rede de apoio a pessoas com doenças
 crônicas. O sistema aproxima Assistidos — pessoas que precisam de apoio cotidiano —
 de Apoiadores — voluntários e profissionais que oferecem tempo e conhecimento —,
 sempre com mediação humana e com o contato acontecendo pelo canal interno da
 plataforma. O projeto não é um serviço de emergência, não realiza despacho automático
 de voluntários e não intermedeia pagamentos, doações ou qualquer valor financeiro.
 
-A construção partiu de um Documento de Requisitos elaborado especificamente para o
+- A construção partiu de um Documento de Requisitos elaborado especificamente para o
 EloVital. Esse documento reúne a visão geral do sistema, o escopo da primeira versão e
 as dezessete funcionalidades principais descritas como casos de uso, com atores, campos,
 limites, fluxos principal e alternativo, regras de negócio e saídas esperadas. Cada
@@ -19,7 +19,7 @@ requisito recebeu identificador próprio e classificação de prioridade — ess
 importante ou desejável —, o que orientou o recorte da versão inicial e a ordem de
 implementação.
 
-Além das funcionalidades, o documento serviu de base para os quinze requisitos não
+- Além das funcionalidades, o documento serviu de base para os quinze requisitos não
 funcionais, que tratam de usabilidade, acessibilidade, compatibilidade, desempenho,
 disponibilidade, integridade das operações, backup, escalabilidade, parametrização,
 conformidade legal, auditabilidade, integrações externas, localização e gratuidade.
@@ -27,7 +27,7 @@ A acessibilidade segue a WCAG 2.1 nível AA; o tratamento de dados segue a LGPD
 (Lei nº 13.709/2018), incluindo consentimento específico para dados de saúde; e os
 registros de acesso seguem o Marco Civil da Internet (Lei nº 12.965/2014).
 
-O projeto também foi guiado por treze requisitos de segurança derivados de uma análise
+- O projeto também foi guiado por treze requisitos de segurança derivados de uma análise
 de riscos, que relaciona cada perigo identificado — como exposição indevida de dados
 sensíveis, perfis falsos, golpes financeiros e inconsistência de estado nas reservas — às
 soluções adotadas e aos requisitos afetados. Para manter a coerência entre as partes do
@@ -36,19 +36,19 @@ dimensionar o esforço de desenvolvimento, uma estimativa por Análise de Pontos
 Função, com contagem de arquivos lógicos, interfaces, entradas, saídas e consultas
 externas.
 
-O desenvolvimento foi acompanhado por protótipos de alta fidelidade das principais
+- O desenvolvimento foi acompanhado por protótipos de alta fidelidade das principais
 telas, usados como referência de navegação, de hierarquia de informação e de linguagem
 visual. As integrações externas previstas são consulta de CEP, base de municípios do
 IBGE, geolocalização e mapas para cálculo de distância e envio de e-mail. A primeira
 versão é um site responsivo, mobile-first, sem aplicativos nativos.
 
-Ficaram explicitamente fora do escopo desta versão: aplicativos nativos, cobrança ou
+- Ficaram explicitamente fora do escopo desta versão: aplicativos nativos, cobrança ou
 qualquer forma de pagamento, contas institucionais, despacho automático, anexos e
 chamadas no chat, autenticação em dois fatores, API pública, moderação automática por
 inteligência artificial e internacionalização. O uso é gratuito para Assistidos e
 Apoiadores.
 
-Por se tratar de um domínio sensível, este repositório apresenta apenas a visão pública
+- Por se tratar de um domínio sensível, este repositório apresenta apenas a visão pública
 do projeto. A documentação interna de implementação, as decisões técnicas em aberto e os
 detalhes de segurança não são reproduzidos aqui.
 
