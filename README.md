@@ -55,55 +55,56 @@ detalhes de segurança não são reproduzidos aqui.
 * Arquitetura usada
   *Documentação por Requisitos
   
-    *Introduçao
+ ##Introduçåo 
   
-  *Desenvolvimento da ideia do projeto
+-   Desenvolvimento da ideia do projeto
   
-  *Construção de Documentação de Requisitos Funcionais
- •	RF001 – Cadastro e Login
-        •	RF002 -  Autenticação e recuperação de acesso
-        •	RF003 – Perfil, preferências e privacidade
-        •	RF004 - Agenda solidária do apoiador
-        •	RF005 - Permitir que o Assistido registre uma necessidade de apoio
-        •	RF006 - Análise e validação da solicitação pelo mediador
-        •	RF007 – Catalogo de apoiadores disponíveis e filtros
-        •	RF008 - Reserva de horário e vínculo de apoio
-        •	RF009 - Cancelamento e remarcação
-        •	RF010 – Notificações
-        •	RF011 - Canal de conversa (chat)
-        •	RF012 - Conclusão do apoio (dupla confirmação)
-        •	RF013 - Avaliação entre assistido e apoiador
-        •	RF014 - Denúncia de usuário ou conteúdo
-        •	RF015 - administrativa e mediação
-        •	RF016 – Verificação de identidade e de registro profissional
-        •	RF017 - Histórico, ocorrências e expiração
+-   Construção de Documentação de Requisitos Funcionais
+     •	RF001 – Cadastro e Login
+           •	RF002 -  Autenticação e recuperação de acesso
+           •	RF003 – Perfil, preferências e privacidade
+           •	RF004 - Agenda solidária do apoiador
+           •	RF005 - Permitir que o Assistido registre uma necessidade de apoio
+           •	RF006 - Análise e validação da solicitação pelo mediador
+           •	RF007 – Catalogo de apoiadores disponíveis e filtros
+           •	RF008 - Reserva de horário e vínculo de apoio
+           •	RF009 - Cancelamento e remarcação
+           •	RF010 – Notificações
+           •	RF011 - Canal de conversa (chat)
+           •	RF012 - Conclusão do apoio (dupla confirmação)
+           •	RF013 - Avaliação entre assistido e apoiador
+           •	RF014 - Denúncia de usuário ou conteúdo
+           •	RF015 - administrativa e mediação
+           •	RF016 – Verificação de identidade e de registro profissional
+           •	RF017 - Histórico, ocorrências e expiração
+     
   
+- Requisitos não-Funcionais 
+     * WCAG 2.1 Nivel AA
   
-    *Requisitos não-Funcionais 
-   * WCAG 2.1 Nivel AA
-
-       * LGPD 13.709/2018
-         
-        * Marco Civel Da Internet 12.965/2014
-          
-          * Politicas de Privacidade (Constituição Art. 11)
+         * LGPD 13.709/2018
+           
+          * Marco Civel Da Internet 12.965/2014
+            
+            * Politicas de Privacidade (Constituição Art. 11)
    
-    * Requisitos de Segurança
-      * Politica contra Vazamento de Dados
-        
-      *  Acesso Bloqueado a Terceiros
-        
-      *  Bloqueio  A Informações sensíveis
-        
-      *  Proteção Contra Medidas Abusivas
+     * Requisitos de Segurança
+       * Politica contra Vazamento de Dados
+         
+       *  Acesso Bloqueado a Terceiros
+         
+       *  Bloqueio  A Informações sensíveis
+         
+       *  Proteção Contra Medidas Abusivas
 
-  *Matriz de Avaliação de Riscos
-    * Catastróficos = RS004 RS013 RS001
-    * Críticos = RS011 RS002 RS003 RS005 RS008 RS010 RS012
-    * Marginal = RS006 RS007 RS009
-    * Insignificante =  
+  ##  Matriz de Avaliação de Riscos
+    
+     * Catastróficos = RS004 RS013 RS001
+     * Críticos = RS011 RS002 RS003 RS005 RS008 RS010 RS012
+     * Marginal = RS006 RS007 RS009
+     * Insignificante =  
 
-* Pontos de Função - Elovital
+- Pontos de Função - Elovital
 
 PONTO DE FUNÇÃO – ELOVITAL 
 Requisito	Complexida de	ALI	AIE	SE	EE	CE	Total
