@@ -1,6 +1,5 @@
 # Projeto-Elovital
 
- Detalhamento do projeto 
 
 ## Como o projeto foi construído
 
