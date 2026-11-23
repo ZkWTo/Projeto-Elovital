@@ -54,18 +54,20 @@ detalhes de segurança não são reproduzidos aqui.
 
 
 * Arquitetura usada
-  *Documentação por Requisitos 
+  *Documentação por Requisitos
+  
     *Introduçao
-      *Desenvolvimento da ideia do projeto
+  
+  *Desenvolvimento da ideia do projeto
   
   *Construção de Documentação de Requisitos Funcionais
-      •	RF001 – Cadastro e Login
+ •	RF001 – Cadastro e Login
         •	RF002 -  Autenticação e recuperação de acesso
         •	RF003 – Perfil, preferências e privacidade
         •	RF004 - Agenda solidária do apoiador
         •	RF005 - Permitir que o Assistido registre uma necessidade de apoio
         •	RF006 - Análise e validação da solicitação pelo mediador
-        •	RF007 – Catalogo de apoiadores disponíveis e filtros 
+        •	RF007 – Catalogo de apoiadores disponíveis e filtros
         •	RF008 - Reserva de horário e vínculo de apoio
         •	RF009 - Cancelamento e remarcação
         •	RF010 – Notificações
@@ -74,19 +76,26 @@ detalhes de segurança não são reproduzidos aqui.
         •	RF013 - Avaliação entre assistido e apoiador
         •	RF014 - Denúncia de usuário ou conteúdo
         •	RF015 - administrativa e mediação
-        •	RF016 – Verificação de identidade e de registro profissional 
+        •	RF016 – Verificação de identidade e de registro profissional
         •	RF017 - Histórico, ocorrências e expiração
   
+  
     *Requisitos não-Funcionais 
-      * WCAG 2.1 Nivel AA
-      * LGPD 13.709/2018
-      * Marco Civel Da Internet 12.965/2014
-      * Politicas de Privacidade (Constituição Art. 11)
+   * WCAG 2.1 Nivel AA
+
+       * LGPD 13.709/2018
+         
+        * Marco Civel Da Internet 12.965/2014
+          
+          * Politicas de Privacidade (Constituição Art. 11)
    
     * Requisitos de Segurança
       * Politica contra Vazamento de Dados
+        
       *  Acesso Bloqueado a Terceiros
+        
       *  Bloqueio  A Informações sensíveis
+        
       *  Proteção Contra Medidas Abusivas
 
   *Matriz de Avaliação de Riscos
@@ -100,23 +109,41 @@ detalhes de segurança não são reproduzidos aqui.
 PONTO DE FUNÇÃO – ELOVITAL 
 Requisito	Complexida de	ALI	AIE	SE	EE	CE	Total
 RF001	Alta	30	7	5	6	0	48
+
 RF002	Baixa	0	0	4	6	0	10
+
 RF003	Média	10	0	0	4	4	18
+
 RF004	Alta	15	0	5	12	6	38
+
 RF005	Alta	15	7	7	6	6	41
+
 RF006	Alta	10	0	7	12	12	41
+
 RF007	Alta	0	7	7	0	12	26
+
 RF008	Alta	0	0	14	12	6	32
+
 RF009	Média	0	0	5	8	4	17
+
 RF010	Média	10	7	10	0	4	31
+
 RF011	Alta	15	0	7	6	6	34
+
 RF012	Média	0	0	5	4	0	9
+
 RF013	Média	10	0	5	4	4	23
+
 RF014	Média	10	0	5	4	0	19
+
 RF015	Alta	15	0	7	12	12	46
+
 RF016	Média	10	0	5	4	0	19
+
 RF017	Média	0	0	5	4	4	13
+
 TOTAL	—	150	28	103	104	80	465
+
 
 ****
       
