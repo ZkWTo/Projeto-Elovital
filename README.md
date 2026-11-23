@@ -145,6 +145,21 @@ RF017	Média	0	0	5	4	4	13
 TOTAL	—	150	28	103	104	80	465
 
 
+
+##Referencias 
+
+Tela 10 — Conclusão e avaliação (RF012)
+10.
+
+Referências
+
+1. Modelo de documento de requisitos fornecido pelo solicitante, utilizado como referência de organização e de formato.
+13. Documento de Requisitos do EloVital.
+14. Protótipos Visuais — EloVital: telas de alta fidelidade.
+15. BRASIL. Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD).
+16. BRASIL. Lei nº 12.965, de 24 de abril de 2014 — Marco Civil da Internet.
+17. W3C. Web Content Accessibility Guidelines (WCAG) 2.1.
+18. IFPUG. Counting Practices Manual — Análise por Pontos de Função.
 ****
       
         
