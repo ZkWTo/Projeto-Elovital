@@ -43,12 +43,15 @@ set local search_path = elovital, public, extensions;
 -- 3. Contas e perfis
 -- -----------------------------------------------------------------------------
 
+-- Alterar o tipo do cpf hash para criptografado e deixar o cpf cifrado para
+-- select futuros 
+
 create table elovital.usuario (
     id                  uuid primary key default gen_random_uuid(),
     email               citext not null,
     password            text not null,
     nome_completo       text not null,
-    cpf_hash            bytea not null,
+    cpf_hash            bytea not null,       
     cpf_cifrado         text not null,
     data_nascimento     date not null,
     celular_cifrado     text not null,
@@ -207,7 +210,7 @@ create index documento_status_expurgo_idx on elovital.documento_verificacao (sta
 create table elovital.tentativa_login (
     id          bigserial primary key,
     email_hash  bytea not null,
-    ip_hash     bytea,
+    ip_hash     bytea not null, 
     sucesso     boolean not null,
     criado_em   timestamptz not null default now()
 );

@@ -92,15 +92,6 @@ Cada ADR segue a mesma estrutura:
 6. Toda transição de estado relevante gera auditoria.
 7. Todo prazo, limite e raio vem da tabela `parametro`, não de constante no código.
 
-## Como aprovar
-
-1. Ler o PRD e confirmar o escopo da primeira versão.
-2. Ler os ADRs 0005 a 0009 (fundação) e aprovar a stack.
-3. Ler os ADRs 0011, 0012 e 0013 (fluxo crítico: estados, reserva e dados sensíveis).
-4. Ler os ADRs transversais 0014 a 0023.
-5. Resolver as decisões pendentes herdadas do PRD (seção 9.4 do PRD e checklist da Parte IV).
-6. Marcar cada ADR de `Proposto` para `Aceito`.
-
 ## Relação com a proposta de banco
 
 O pacote [Proposta de banco Supabase](../propostas/banco-supabase/README.md) continua válido para **schema, papéis, RLS, criptografia, retenção e operação**. O que muda é o cliente: o schema deixa de ser gerado pelo Django e passa a ser versionado por **Flyway** (ver [ADR 0007](0007-persistencia-postgresql-jpa-flyway.md)). Os nomes de tabelas, colunas e as funções SQL da proposta permanecem a referência.

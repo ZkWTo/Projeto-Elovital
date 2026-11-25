@@ -3,7 +3,7 @@
 - **Status:** Rascunho para aprovação — nada aplicado
 - **Data:** 2026-11-16
 - **ADR relacionada:** [ADR 0004 — Supabase (PostgreSQL)](../../adr/0004-supabase-postgresql.md)
-- **PRD:** [PRD 0001](../../prd/0001-elovital.md)
+- **PRD:** [PRD 0001](../../prd/0001-detalhamento-prd-e-adrs.md)
 
 ## Por que este pacote está separado
 
@@ -23,7 +23,7 @@ Nada nesta pasta foi aplicado em código, migrations ou no Supabase. A leitura e
 
 ## O que não muda
 
-- O produto e o escopo do [PRD 0001](../../prd/0001-elovital.md).
+- O produto e o escopo do [PRD 0001](../../prd/0001-detalhamento-prd-e-adrs.md).
 - A arquitetura MVT com camada de service ([ADR 0001](../../adr/0001-mvt-com-camada-de-service.md)).
 - A autenticação e a sessão do Django ([ADR 0002](../../adr/0002-usuario-papeis-e-autenticacao.md)).
 - O conteúdo em texto puro ([ADR 0003](../../adr/0003-conteudo-em-texto-puro.md)).
@@ -64,31 +64,3 @@ O teste não cobre, ainda, concorrência com duas conexões simultâneas, expurg
 
 O script usado nessa validação está em [`sql/teste_funcional.sql`](sql/teste_funcional.sql). Ele exige banco vazio e **não deve ser executado em produção**.
 
-## Resumo das decisões que precisam de aprovação
-
-1. **Plano e região:** Supabase Pro em `sa-east-1` (São Paulo), com projetos separados por ambiente.
-2. **Conexão:** Supavisor em modo sessão, TLS `verify-full`, pool dimensionado para o plano.
-3. **Schema:** schema `elovital`, separado de `public` e de `extensions`; Data API desabilitada.
-4. **Papéis:** `elovital_migrator`, `elovital_app`, `elovital_readonly`; `anon` e `authenticated` sem privilégios.
-5. **RLS:** habilitada como defesa em profundidade; autorização de linha nos services.
-6. **Criptografia:** CPF com HMAC para unicidade + cifra; telefone e contato de emergência cifrados; documentos em bucket privado.
-7. **Autenticação:** continua no Django; Supabase Auth fica fora da primeira versão.
-8. **Backup:** backup diário e PITR de 7 dias; teste de restauração trimestral.
-9. **Retenção:** prazos da seção 7 da [Segurança e LGPD](03-seguranca-lgpd.md), com revisão jurídica.
-10. **Documentos:** Supabase Storage privado, expurgo 90 dias após a verificação.
-
-## Como aprovar
-
-1. Leia os cinco documentos na ordem acima.
-2. Marque cada item no [checklist](05-checklist-aprovacao.md).
-3. Registre nome, data e eventuais ressalvas no fim do checklist.
-4. Depois do aceite, a [ADR 0004](../../adr/0004-supabase-postgresql.md) passa de `Proposto` para `Aceito`, e as migrations e os testes de segurança podem ser implementados.
-
-## Fora do escopo desta proposta
-
-- Contratar o plano ou criar o projeto no Supabase.
-- Escrever as migrations Django definitivas.
-- Migrar dados reais de produção (não existe produção ainda).
-- Revisão jurídica formal do contrato, DPA e política de privacidade.
-- Escolher provedor de e-mail, mapas e notificações push.
-- Definir preços, metas comerciais ou indicadores de produto.
