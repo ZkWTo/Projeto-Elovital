@@ -1,0 +1,31 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Histórico</h1>
+  <p>Reservas e solicitações preservadas mesmo após cancelamento ou expiração.</p>
+</section>
+
+<section aria-labelledby="reservas-titulo">
+  <h2 id="reservas-titulo">Reservas</h2>
+  {{#reservas}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · {{criadaEm}}</p>
+    <h3>{{solicitacaoTitulo}}</h3>
+    <p>{{periodo}} · {{local}}</p>
+    <p><a class="botao" href="/reservas/{{id}}">Abrir</a></p>
+  </article>
+  {{/reservas}}
+  {{^reservas}}<p class="vazio">Nenhuma reserva no histórico.</p>{{/reservas}}
+</section>
+
+<section aria-labelledby="solicitacoes-titulo">
+  <h2 id="solicitacoes-titulo">Solicitações</h2>
+  {{#solicitacoes}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · {{criadaEm}}</p>
+    <h3>{{titulo}}</h3>
+    <p class="dica">{{local}}</p>
+  </article>
+  {{/solicitacoes}}
+  {{^solicitacoes}}<p class="vazio">Nenhuma solicitação no histórico.</p>{{/solicitacoes}}
+</section>
+{{>footer}}

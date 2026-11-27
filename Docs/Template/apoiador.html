@@ -1,0 +1,48 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">{{#apoiador.verificado}}Verificado{{/apoiador.verificado}}{{^apoiador.verificado}}Em verificação{{/apoiador.verificado}}</p>
+  <h1>{{apoiador.nome}}</h1>
+  <p>{{apoiador.especialidades}} · {{apoiador.modalidade}}</p>
+  <p>{{apoiador.local}} · {{apoiador.distancia}} · {{apoiador.nota}}</p>
+</section>
+
+<section class="grade duas">
+  <article class="cartao">
+    <h2>Sobre o apoio</h2>
+    <p>Este perfil mostra apenas dados públicos. Telefone, e-mail e endereço exato são protegidos.</p>
+    <p class="dica">O contato acontece pelo chat interno após a reserva.</p>
+  </article>
+  <article class="cartao">
+    <h2>Antes de reservar</h2>
+    {{#minhasSolicitacoes}}
+    <p>Escolha uma das suas solicitações abertas ao lado do horário desejado.</p>
+    {{/minhasSolicitacoes}}
+    {{^minhasSolicitacoes}}
+    <p>Você precisa de uma solicitação aprovada para reservar.</p>
+    <p><a class="botao" href="/solicitacoes/nova">Criar solicitação</a></p>
+    {{/minhasSolicitacoes}}
+  </article>
+</section>
+
+<section aria-labelledby="horarios-titulo">
+  <h2 id="horarios-titulo">Horários disponíveis</h2>
+  {{#horarios}}
+  <article class="cartao horario">
+    <p class="etiqueta">{{modalidadeLabel}} · {{statusLabel}}</p>
+    <h3>{{periodo}}</h3>
+    <p>{{local}}</p>
+    {{#observacoes}}<p class="dica">{{observacoes}}</p>{{/observacoes}}
+    <form method="post" action="/reservas" class="inline">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <input type="hidden" name="horarioId" value="{{id}}">
+      <label for="solicitacao-{{id}}">Solicitação</label>
+      <select id="solicitacao-{{id}}" name="solicitacaoId" required>
+        {{#minhasSolicitacoes}}<option value="{{id}}">{{titulo}}</option>{{/minhasSolicitacoes}}
+      </select>
+      <button class="botao" type="submit">Reservar horário</button>
+    </form>
+  </article>
+  {{/horarios}}
+  {{^horarios}}<p class="vazio">Nenhum horário disponível no momento.</p>{{/horarios}}
+</section>
+{{>footer}}

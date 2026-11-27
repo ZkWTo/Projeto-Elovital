@@ -1,0 +1,45 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Apoiadores disponíveis</h1>
+  <p>{{qtdApoiadores}} perfis encontrados. O catálogo nunca mostra CPF, telefone, e-mail ou endereço exato.</p>
+</section>
+
+<form class="filtros cartao" method="get" action="/apoiadores">
+  <label for="especialidade">Especialidade</label>
+  <select id="especialidade" name="especialidade">
+    <option value="">Todas</option>
+    {{#especialidades}}<option value="{{nome}}">{{nome}}{{#regulamentada}} (regulamentada){{/regulamentada}}</option>{{/especialidades}}
+  </select>
+
+  <label for="modalidade">Modalidade</label>
+  <select id="modalidade" name="modalidade">
+    <option value="">Todas</option>
+    <option value="PRESENCIAL">Presencial</option>
+    <option value="REMOTO">Remoto</option>
+    <option value="AMBOS">Presencial e remoto</option>
+  </select>
+
+  <label for="municipio">Município</label>
+  <select id="municipio" name="municipio">
+    <option value="">Todos</option>
+    {{#municipios}}<option value="{{nome}}">{{nome}}/{{uf}}</option>{{/municipios}}
+  </select>
+
+  <label for="distancia">Distância máxima (km)</label>
+  <input id="distancia" name="distancia" type="number" min="1" max="100" value="{{f_distancia}}">
+  <button class="botao" type="submit">Filtrar</button>
+</form>
+
+<section class="grade duas">
+  {{#apoiadores}}
+  <article class="cartao">
+    <p class="etiqueta">{{#verificado}}Verificado{{/verificado}}{{^verificado}}Em verificação{{/verificado}}</p>
+    <h2>{{nome}}</h2>
+    <p>{{especialidades}} · {{modalidade}}</p>
+    <p class="dica">{{local}} · {{distancia}} · {{nota}}</p>
+    <p><a class="botao" href="/apoiadores/{{usuarioId}}">Ver perfil e horários</a></p>
+  </article>
+  {{/apoiadores}}
+  {{^apoiadores}}<p class="vazio">Nenhum apoiador encontrado com esses filtros.</p>{{/apoiadores}}
+</section>
+{{>footer}}

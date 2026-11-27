@@ -1,0 +1,17 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Registrar denúncia</h1>
+  <p>A mediação analisa a denúncia. Ela não é exibida ao denunciado e não deixa marca pública quando é improcedente.</p>
+</section>
+
+<form class="formulario cartao" method="post" action="/denuncias">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <input type="hidden" name="alvoId" value="{{alvo}}">
+  <input type="hidden" name="reservaId" value="{{reservaId}}">
+  {{#alvoNome}}<p>Denunciando: <strong>{{alvoNome}}</strong></p>{{/alvoNome}}
+  <label for="descricao">O que aconteceu (até 500 caracteres)</label>
+  <textarea id="descricao" name="descricao" maxlength="500" rows="5" required></textarea>
+  <p class="dica">Descreva fatos e horários. Evite dados pessoais desnecessários.</p>
+  <button class="botao perigo" type="submit">Enviar denúncia</button>
+</form>
+{{>footer}}

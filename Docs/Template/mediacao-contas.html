@@ -1,0 +1,69 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">Mediação · {{emAnalise}} em análise</p>
+  <h1>Contas e verificação</h1>
+  <p>Dados sensíveis só são exibidos com motivo registrado em auditoria.</p>
+</section>
+
+<section aria-labelledby="contas-titulo">
+  <h2 id="contas-titulo">Contas</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Nome</th><th>E-mail</th><th>Papel</th><th>Status</th><th>Cadastro</th></tr></thead>
+      <tbody>
+      {{#contas}}
+      <tr>
+        <td>{{nome}}</td><td>{{email}}</td><td>{{papel}}</td><td>{{statusLabel}}</td><td>{{criadoEm}}</td>
+      </tr>
+      {{/contas}}
+      </tbody>
+    </table>
+  </div>
+
+  {{#contas}}
+  <article class="cartao">
+    <p class="etiqueta">{{papel}} · {{statusLabel}}</p>
+    <h3>{{nome}}</h3>
+    <form method="post" action="/mediacao/contas/{{id}}/aprovar" class="inline">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="botao" type="submit">Aprovar</button>
+    </form>
+    <form method="post" action="/mediacao/contas/{{id}}/suspender" class="inline">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <input type="hidden" name="motivo" value="Suspensão pela mediação">
+      <button class="botao secundario" type="submit">Suspender</button>
+    </form>
+    <form method="post" action="/mediacao/contas/{{id}}/anonimizar" class="inline">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="link" type="submit">Anonimizar (LGPD)</button>
+    </form>
+  </article>
+  {{/contas}}
+</section>
+
+<section aria-labelledby="docs-titulo">
+  <h2 id="docs-titulo">Documentos enviados</h2>
+  {{#documentos}}
+  <article class="cartao">
+    <p class="etiqueta">{{tipo}} · {{statusLabel}}</p>
+    <h3>{{usuarioNome}}</h3>
+    <p class="dica">Enviado em {{enviadoEm}}</p>
+    {{#justificativa}}<p>Justificativa anterior: {{justificativa}}</p>{{/justificativa}}
+    <form class="formulario compacto" method="post" action="/mediacao/documentos/{{id}}/decidir">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="decisao-{{id}}">Decisão</label>
+      <select id="decisao-{{id}}" name="decisao">
+        <option value="aprovar">Aprovar</option>
+        <option value="recusar">Recusar</option>
+      </select>
+      <label for="just-doc-{{id}}">Justificativa (obrigatória na recusa)</label>
+      <input id="just-doc-{{id}}" name="justificativa" maxlength="500">
+      <label for="motivo-doc-{{id}}">Motivo do acesso ao documento</label>
+      <input id="motivo-doc-{{id}}" name="motivoAcesso" maxlength="200" required>
+      <button class="botao" type="submit">Registrar decisão</button>
+    </form>
+  </article>
+  {{/documentos}}
+  {{^documentos}}<p class="vazio">Nenhum documento pendente.</p>{{/documentos}}
+</section>
+{{>footer}}

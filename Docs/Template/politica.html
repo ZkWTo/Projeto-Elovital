@@ -1,0 +1,28 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Privacidade e LGPD</h1>
+  <p>Como o EloVital trata dados pessoais e dados de saúde.</p>
+</section>
+<article class="cartao prosa">
+  <h2>Dados coletados</h2>
+  <p>Nome, e-mail, CPF, celular, data de nascimento, endereço, condições crônicas e documentos
+  de verificação. A coleta é mínima e vinculada à finalidade do apoio.</p>
+
+  <h2>Como protegemos</h2>
+  <ul>
+    <li>CPF guardado como HMAC-SHA-256 e cifra AES-256-GCM.</li>
+    <li>Telefone e contato de emergência cifrados.</li>
+    <li>Documentos em bucket privado, sem URL pública permanente.</li>
+    <li>Acesso da mediação a dado sensível exige motivo e gera auditoria.</li>
+    <li>Retenção definida e anonimização em vez de exclusão física.</li>
+  </ul>
+
+  <h2>Seus direitos</h2>
+  <p>Você pode solicitar correção, portabilidade, revogação de consentimento e anonimização.
+  O catálogo nunca expõe CPF, telefone, e-mail ou endereço exato.</p>
+
+  <h2>Segurança</h2>
+  <p>Senhas usam derivação PBKDF2 com salt. Sessões expiram por inatividade, o login tem
+  bloqueio por tentativas e toda ação relevante gera trilha de auditoria.</p>
+</article>
+{{>footer}}

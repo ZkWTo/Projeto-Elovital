@@ -1,0 +1,53 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Solicitações</h1>
+  {{#minhas}}
+  <p>Cada solicitação passa por análise humana antes de aparecer aos apoiadores.</p>
+  <p><a class="botao grande" href="/solicitacoes/nova">Nova solicitação</a></p>
+  {{/minhas}}
+  {{^minhas}}
+  <p>Solicitações aprovadas e disponíveis para apoio.</p>
+  {{/minhas}}
+</section>
+
+<section class="lista">
+  {{#solicitacoes}}
+  <article class="cartao" id="{{id}}">
+    <p class="etiqueta">{{statusLabel}} · prioridade {{prioridadeLabel}} · {{criadaEm}}</p>
+    <h2>{{titulo}}</h2>
+    <p>{{descricao}}</p>
+    {{#observacao}}<p class="dica">Observação de cuidado: {{observacao}}</p>{{/observacao}}
+    <p class="dica">{{local}} · expira em {{expiraEm}}</p>
+
+    {{#podeCancelar}}
+    <details>
+      <summary>Cancelar solicitação</summary>
+      <form method="post" action="/solicitacoes/{{id}}/cancelar">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="motivo-{{id}}">Motivo (opcional)</label>
+        <input id="motivo-{{id}}" name="motivo" maxlength="500">
+        <button class="botao perigo" type="submit">Confirmar cancelamento</button>
+      </form>
+    </details>
+    {{/podeCancelar}}
+
+    {{#podeReenviar}}
+    <details open>
+      <summary>Ajustar e reenviar</summary>
+      <form class="formulario" method="post" action="/solicitacoes/{{id}}/reenviar">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="titulo-{{id}}">Título</label>
+        <input id="titulo-{{id}}" name="titulo" value="{{titulo}}" maxlength="80" required>
+        <label for="descricao-{{id}}">Descrição</label>
+        <textarea id="descricao-{{id}}" name="descricao" maxlength="1000" rows="4" required>{{descricao}}</textarea>
+        <label for="obs-{{id}}">Observação de cuidado</label>
+        <textarea id="obs-{{id}}" name="observacao" maxlength="500" rows="2">{{observacao}}</textarea>
+        <button class="botao" type="submit">Reenviar para análise</button>
+      </form>
+    </details>
+    {{/podeReenviar}}
+  </article>
+  {{/solicitacoes}}
+  {{^solicitacoes}}<p class="vazio">Nenhuma solicitação.</p>{{/solicitacoes}}
+</section>
+{{>footer}}

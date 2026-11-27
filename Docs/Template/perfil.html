@@ -1,0 +1,75 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Perfil e privacidade</h1>
+  <p>{{papel}} · {{statusConta}} · desde {{criadoEm}}</p>
+</section>
+
+<section class="grade duas">
+  <article class="cartao">
+    <h2>Dados da conta</h2>
+    <p><strong>E-mail:</strong> {{email}}</p>
+    <p><strong>CPF:</strong> {{cpfMascarado}}</p>
+    <p><strong>Nascimento:</strong> {{nascimento}}</p>
+    <p class="dica">O CPF é imutável após o cadastro. A leitura é auditada.</p>
+  </article>
+  <article class="cartao">
+    <h2>Reputação</h2>
+    <p>{{#nota}}{{nota}}{{/nota}}{{^nota}}Sem avaliações ainda.{{/nota}}</p>
+    {{#verificado}}<p class="selo-ok">Selo de verificação ativo.</p>{{/verificado}}
+    <p class="dica">Comentários ocultos pela mediação não alteram a nota.</p>
+  </article>
+</section>
+
+<form class="formulario cartao" method="post" action="/perfil">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <h2>Editar dados</h2>
+  <label for="nome">Nome completo</label>
+  <input id="nome" name="nome" value="{{usuarioNome}}" maxlength="120" required>
+
+  <label for="celular">Celular</label>
+  <input id="celular" name="celular" inputmode="tel" maxlength="16">
+  <p class="dica">Cifrado. Nunca é exibido ao outro participante.</p>
+
+  <label for="cep">CEP</label>
+  <input id="cep" name="cep" value="{{cep}}" maxlength="9">
+  <label for="bairro">Bairro</label>
+  <input id="bairro" name="bairro" value="{{bairro}}" maxlength="80">
+  <label for="municipio">Município</label>
+  <input id="municipio" name="municipio" value="{{municipio}}" maxlength="80">
+  <label for="uf">UF</label>
+  <input id="uf" name="uf" value="{{uf}}" maxlength="2" size="2">
+  <label for="raioKm">Distância máxima (km)</label>
+  <input id="raioKm" name="raioKm" type="number" min="1" max="100" value="{{raioKm}}">
+
+  <label for="condicoes">Condições crônicas</label>
+  <input id="condicoes" name="condicoes" value="{{condicoes}}" maxlength="500">
+  <label for="limitacoes">Limitações e preferências</label>
+  <textarea id="limitacoes" name="limitacoes" maxlength="300" rows="3">{{limitacoes}}</textarea>
+
+  <label for="modalidade">Modalidade de apoio</label>
+  <select id="modalidade" name="modalidade">
+    <option value="PRESENCIAL">Presencial</option>
+    <option value="REMOTO">Remoto</option>
+    <option value="AMBOS">Presencial e remoto</option>
+  </select>
+
+  <button class="botao grande" type="submit">Salvar perfil</button>
+</form>
+
+<section aria-labelledby="avaliacoes-titulo">
+  <h2 id="avaliacoes-titulo">Avaliações recebidas</h2>
+  {{#avaliacoes}}
+  <article class="cartao">
+    <p class="etiqueta">Nota {{nota}} · {{criadaEm}}</p>
+    <p>{{comentario}}</p>
+    {{#oculta}}<p class="dica">Ocultada pela mediação: {{motivo}}</p>{{/oculta}}
+  </article>
+  {{/avaliacoes}}
+  {{^avaliacoes}}<p class="vazio">Nenhuma avaliação recebida.</p>{{/avaliacoes}}
+</section>
+
+<form class="cartao" method="post" action="/sair">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <p><a href="/verificacao">Verificação de identidade</a> · <a href="/notificacoes">Notificações</a></p>
+</form>
+{{>footer}}

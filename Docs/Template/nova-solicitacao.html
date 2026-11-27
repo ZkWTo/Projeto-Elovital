@@ -1,0 +1,50 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Nova solicitação de apoio</h1>
+  <p>A mediação analisa o texto antes de publicar. Evite telefone, e-mail, links e pedidos de dinheiro.</p>
+  <p class="aviso atencao">Se a prioridade for alta e houver risco imediato, ligue 192 (SAMU). O EloVital não é emergência.</p>
+</section>
+
+<form class="formulario cartao" method="post" action="/solicitacoes">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <label for="titulo">Título</label>
+  <input id="titulo" name="titulo" maxlength="80" required>
+
+  <label for="descricao">O que você precisa</label>
+  <textarea id="descricao" name="descricao" maxlength="1000" rows="5" required></textarea>
+  <p class="dica">Até 1.000 caracteres. O texto é exibido como texto puro.</p>
+
+  <label for="observacao">Observações de cuidado</label>
+  <textarea id="observacao" name="observacao" maxlength="500" rows="3"></textarea>
+  <p class="dica">Mobilidade, horários de medicação, preferências. Sem dados de contato.</p>
+
+  <label for="tipoApoio">Tipo de apoio</label>
+  <select id="tipoApoio" name="tipoApoio">
+    <option>Companhia</option>
+    <option>Transporte</option>
+    <option>Orientação</option>
+    <option>Apoio doméstico leve</option>
+    <option>Outro</option>
+  </select>
+
+  <label for="prioridade">Prioridade</label>
+  <select id="prioridade" name="prioridade">
+    <option value="MEDIA">Média</option>
+    <option value="BAIXA">Baixa</option>
+    <option value="ALTA">Alta</option>
+  </select>
+
+  <label for="cep">CEP</label>
+  <input id="cep" name="cep" maxlength="9" data-cep>
+  <label for="bairro">Bairro</label>
+  <input id="bairro" name="bairro" maxlength="80" data-bairro>
+  <label for="municipio">Município</label>
+  <input id="municipio" name="municipio" maxlength="80" data-municipio>
+  <label for="uf">UF</label>
+  <input id="uf" name="uf" maxlength="2" size="2" data-uf>
+  <label for="raioKm">Distância máxima (km)</label>
+  <input id="raioKm" name="raioKm" type="number" min="1" max="100" value="10">
+
+  <button class="botao grande" type="submit">Enviar para análise</button>
+</form>
+{{>footer}}

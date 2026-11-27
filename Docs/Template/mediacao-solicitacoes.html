@@ -1,0 +1,64 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">Fila de análise</p>
+  <h1>Solicitações</h1>
+  <p>Aprovar publica o pedido no catálogo. Ajuste devolve ao Assistido. Recusar encerra com justificativa.</p>
+</section>
+
+<section aria-labelledby="fila-titulo">
+  <h2 id="fila-titulo">Em análise</h2>
+  {{#solicitacoes}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · prioridade {{prioridadeLabel}} · {{criadaEm}}</p>
+    <h3>{{titulo}}</h3>
+    <p>{{descricao}}</p>
+    {{#observacao}}<p class="dica">Observação de cuidado: {{observacao}}</p>{{/observacao}}
+    <p class="dica">{{local}} · Assistido: {{assistidoNome}} · expira em {{expiraEm}}</p>
+
+    <form class="formulario compacto" method="post" action="/mediacao/solicitacoes/{{id}}/aprovar">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="prioridade-{{id}}">Prioridade final</label>
+      <select id="prioridade-{{id}}" name="prioridade">
+        <option value="BAIXA">Baixa</option>
+        <option value="MEDIA" selected>Média</option>
+        <option value="ALTA">Alta</option>
+      </select>
+      <label for="obs-aprovar-{{id}}">Observação para o catálogo</label>
+      <input id="obs-aprovar-{{id}}" name="observacao" maxlength="500">
+      <button class="botao" type="submit">Aprovar e publicar</button>
+    </form>
+
+    <details>
+      <summary>Ajustar ou recusar</summary>
+      <form class="formulario compacto" method="post" action="/mediacao/solicitacoes/{{id}}/ajuste">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="just-ajuste-{{id}}">Justificativa do ajuste</label>
+        <textarea id="just-ajuste-{{id}}" name="justificativa" maxlength="500" rows="2" required></textarea>
+        <button class="botao secundario" type="submit">Devolver para ajuste</button>
+      </form>
+      <form class="formulario compacto" method="post" action="/mediacao/solicitacoes/{{id}}/recusar">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="just-recusar-{{id}}">Justificativa da recusa</label>
+        <textarea id="just-recusar-{{id}}" name="justificativa" maxlength="500" rows="2" required></textarea>
+        <button class="botao perigo" type="submit">Recusar</button>
+      </form>
+    </details>
+  </article>
+  {{/solicitacoes}}
+  {{^solicitacoes}}<p class="vazio">Nenhuma solicitação aguardando análise.</p>{{/solicitacoes}}
+</section>
+
+<section aria-labelledby="abertas-titulo">
+  <h2 id="abertas-titulo">Publicadas</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Título</th><th>Assistido</th><th>Prioridade</th><th>Local</th><th>Status</th></tr></thead>
+      <tbody>
+      {{#abertas}}
+      <tr><td>{{titulo}}</td><td>{{assistidoNome}}</td><td>{{prioridadeLabel}}</td><td>{{local}}</td><td>{{statusLabel}}</td></tr>
+      {{/abertas}}
+      </tbody>
+    </table>
+  </div>
+</section>
+{{>footer}}

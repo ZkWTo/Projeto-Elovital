@@ -1,0 +1,72 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">Acesso restrito · mediação</p>
+  <h1>Painel da mediação</h1>
+  <p>Fila humana de análise, com auditoria de cada decisão.</p>
+</section>
+
+<section class="kpis" aria-label="Filas">
+  <article class="kpi"><strong>{{filaSolicitacoes}}</strong><span>solicitações em análise</span></article>
+  <article class="kpi"><strong>{{contasAnalise}}</strong><span>contas em análise</span></article>
+  <article class="kpi"><strong>{{documentos}}</strong><span>documentos pendentes</span></article>
+  <article class="kpi"><strong>{{denuncias}}</strong><span>denúncias em análise</span></article>
+  <article class="kpi"><strong>{{contestacoes}}</strong><span>contestações abertas</span></article>
+  <article class="kpi"><strong>{{reservasAnalise}}</strong><span>reservas em mediação</span></article>
+</section>
+
+<nav class="atalhos" aria-label="Áreas da mediação">
+  <a class="botao" href="/mediacao/solicitacoes">Solicitações</a>
+  <a class="botao" href="/mediacao/contas">Contas e documentos</a>
+  <a class="botao" href="/mediacao/denuncias">Denúncias e sanções</a>
+  <a class="botao" href="/mediacao/parametros">Parâmetros e cadastros</a>
+  <a class="botao" href="/mediacao/auditoria">Auditoria</a>
+  <form method="post" action="/mediacao/rotinas" class="inline">
+    <input type="hidden" name="csrf" value="{{csrf}}">
+    <button class="botao secundario" type="submit">Executar rotinas agora</button>
+  </form>
+</nav>
+
+<section class="grade duas" aria-labelledby="solicitacoes-titulo">
+  <h2 id="solicitacoes-titulo" class="largura-total">Próximas da fila</h2>
+  {{#solicitacoes}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · prioridade {{prioridadeLabel}}</p>
+    <h3>{{titulo}}</h3>
+    <p>{{descricao}}</p>
+    <p class="dica">{{local}} · criada em {{criadaEm}}</p>
+    <p><a class="botao" href="/mediacao/solicitacoes">Analisar</a></p>
+  </article>
+  {{/solicitacoes}}
+  {{^solicitacoes}}<p class="vazio">Fila vazia.</p>{{/solicitacoes}}
+</section>
+
+<section class="grade duas" aria-labelledby="contas-titulo">
+  <h2 id="contas-titulo" class="largura-total">Contas aguardando validação</h2>
+  {{#contas}}
+  <article class="cartao">
+    <p class="etiqueta">{{papel}} · {{statusLabel}}</p>
+    <h3>{{nome}}</h3>
+    <p class="dica">{{email}} · cadastro em {{criadoEm}}</p>
+    <p><a class="botao" href="/mediacao/contas">Validar</a></p>
+  </article>
+  {{/contas}}
+  {{^contas}}<p class="vazio">Nenhuma conta pendente.</p>{{/contas}}
+</section>
+
+<section aria-labelledby="auditoria-titulo">
+  <h2 id="auditoria-titulo">Últimas ações auditadas</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Quando</th><th>Ator</th><th>Ação</th><th>Entidade</th></tr></thead>
+      <tbody>
+      {{#auditoria}}
+      <tr><td>{{criadaEm}}</td><td>{{ator}}</td><td>{{acao}}</td><td>{{entidade}}</td></tr>
+      {{/auditoria}}
+      </tbody>
+    </table>
+  </div>
+  <p><a href="/mediacao/auditoria">Ver auditoria completa</a></p>
+</section>
+
+<p class="dica">Rotinas: {{rotinas}} · última execução: {{ultimaRotina}}</p>
+{{>footer}}

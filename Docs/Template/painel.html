@@ -1,0 +1,89 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Olá, {{usuarioNome}}</h1>
+  <p>{{usuarioPapel}} · painel de acompanhamento</p>
+</section>
+
+<section class="kpis" aria-label="Resumo">
+  <article class="kpi"><strong>{{qtdSolicitacoes}}</strong><span>solicitações</span></article>
+  <article class="kpi"><strong>{{qtdReservas}}</strong><span>reservas</span></article>
+  <article class="kpi"><strong>{{naoLidas}}</strong><span>notificações não lidas</span></article>
+</section>
+
+<section class="grade duas" aria-labelledby="reservas-titulo">
+  <h2 id="reservas-titulo" class="largura-total">Minhas reservas</h2>
+  {{#reservas}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}}</p>
+    <h3>{{solicitacaoTitulo}}</h3>
+    <p>{{periodo}} · {{local}}</p>
+    <p class="dica">Com {{outraParteNome}} · {{modalidade}}</p>
+    <p><a class="botao" href="/reservas/{{id}}">Abrir reserva</a>
+       <a class="botao secundario" href="/reservas/{{id}}/chat">Chat</a></p>
+  </article>
+  {{/reservas}}
+  {{^reservas}}<p class="vazio">Nenhuma reserva ainda.</p>{{/reservas}}
+</section>
+
+<section class="grade duas" aria-labelledby="solicitacoes-titulo">
+  <h2 id="solicitacoes-titulo" class="largura-total">Solicitações</h2>
+  {{#solicitacoes}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · prioridade {{prioridadeLabel}}</p>
+    <h3>{{titulo}}</h3>
+    <p>{{local}} · {{criadaEm}}</p>
+    <p><a class="botao" href="/solicitacoes">Ver todas</a></p>
+  </article>
+  {{/solicitacoes}}
+  {{#solicitacoesAbertas}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · prioridade {{prioridadeLabel}}</p>
+    <h3>{{titulo}}</h3>
+    <p>{{descricao}}</p>
+    <p class="dica">{{local}}</p>
+  </article>
+  {{/solicitacoesAbertas}}
+  {{^solicitacoes}}{{^solicitacoesAbertas}}<p class="vazio">Nenhuma solicitação.</p>{{/solicitacoesAbertas}}{{/solicitacoes}}
+</section>
+
+<section class="grade duas" aria-labelledby="agenda-titulo">
+  <h2 id="agenda-titulo" class="largura-total">Minha agenda</h2>
+  {{#agenda}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}}</p>
+    <h3>{{periodo}}</h3>
+    <p>{{modalidadeLabel}} · {{local}}</p>
+    <p><a class="botao" href="/agenda">Gerenciar agenda</a></p>
+  </article>
+  {{/agenda}}
+  {{^agenda}}<p class="vazio">A agenda aparece aqui para Apoiadores.</p>{{/agenda}}
+</section>
+
+<section class="grade duas" aria-labelledby="notificacoes-titulo">
+  <h2 id="notificacoes-titulo" class="largura-total">Últimas notificações</h2>
+  {{#notificacoes}}
+  <article class="cartao notificacao">
+    <p class="etiqueta">{{tipo}} · {{criadaEm}}</p>
+    <p>{{texto}}</p>
+    <p><a href="{{link}}">Abrir</a></p>
+  </article>
+  {{/notificacoes}}
+  {{^notificacoes}}<p class="vazio">Nada por aqui.</p>{{/notificacoes}}
+</section>
+
+<section class="grade duas" aria-labelledby="sugestoes-titulo">
+  <h2 id="sugestoes-titulo" class="largura-total">Apoiadores sugeridos</h2>
+  {{#apoiadores}}
+  <article class="cartao">
+    <p class="etiqueta">{{#verificado}}Verificado{{/verificado}}{{^verificado}}Em verificação{{/verificado}}</p>
+    <h3>{{nome}}</h3>
+    <p>{{especialidades}} · {{modalidade}}</p>
+    <p class="dica">{{local}} · {{distancia}} · {{nota}}</p>
+    <p><a class="botao" href="/apoiadores/{{usuarioId}}">Ver perfil</a></p>
+  </article>
+  {{/apoiadores}}
+  {{^apoiadores}}<p class="vazio">Nenhuma sugestão no momento.</p>{{/apoiadores}}
+</section>
+
+<p class="dica">{{rotinas}}</p>
+{{>footer}}

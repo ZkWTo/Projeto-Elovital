@@ -1,0 +1,125 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">Mediação</p>
+  <h1>Denúncias, sanções e reservas</h1>
+  <p>Toda decisão exige justificativa. Sanções podem ser contestadas.</p>
+</section>
+
+<section aria-labelledby="denuncias-titulo">
+  <h2 id="denuncias-titulo">Denúncias em análise</h2>
+  {{#denuncias}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · {{criadaEm}}</p>
+    <p><strong>Denunciante:</strong> {{denunciante}} · <strong>Alvo:</strong> {{alvo}}</p>
+    <p>{{descricao}}</p>
+    <form class="formulario compacto" method="post" action="/mediacao/denuncias/{{id}}/decidir">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="decisao-den-{{id}}">Decisão</label>
+      <select id="decisao-den-{{id}}" name="decisao">
+        <option value="procedente">Procedente</option>
+        <option value="improcedente">Improcedente</option>
+      </select>
+      <label for="just-den-{{id}}">Justificativa</label>
+      <textarea id="just-den-{{id}}" name="justificativa" maxlength="500" rows="2" required></textarea>
+      <button class="botao" type="submit">Registrar decisão</button>
+    </form>
+
+    <form class="formulario compacto" method="post" action="/mediacao/sancoes">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <input type="hidden" name="usuarioId" value="{{alvoId}}">
+      <input type="hidden" name="denunciaId" value="{{id}}">
+      <label for="tipo-sancao-{{id}}">Sanção ao alvo</label>
+      <select id="tipo-sancao-{{id}}" name="tipo">
+        <option value="ADVERTENCIA">Advertência</option>
+        <option value="SUSPENSAO">Suspensão</option>
+        <option value="BLOQUEIO">Bloqueio</option>
+      </select>
+      <label for="dias-{{id}}">Dias (suspensão)</label>
+      <input id="dias-{{id}}" name="dias" type="number" min="0" max="365" value="7">
+      <label for="motivo-sancao-{{id}}">Motivo</label>
+      <input id="motivo-sancao-{{id}}" name="motivo" maxlength="500" required>
+      <button class="botao perigo" type="submit">Aplicar sanção</button>
+    </form>
+  </article>
+  {{/denuncias}}
+  {{^denuncias}}<p class="vazio">Nenhuma denúncia em análise.</p>{{/denuncias}}
+</section>
+
+<section aria-labelledby="contestacoes-titulo">
+  <h2 id="contestacoes-titulo">Contestações de sanção</h2>
+  {{#contestacoes}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · {{criadaEm}} · {{usuario}}</p>
+    <p>{{texto}}</p>
+    <form class="formulario compacto" method="post" action="/mediacao/contestacoes/{{id}}/decidir">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="decisao-con-{{id}}">Decisão</label>
+      <select id="decisao-con-{{id}}" name="decisao">
+        <option value="deferir">Deferir (revogar sanção)</option>
+        <option value="indeferir">Indeferir (manter sanção)</option>
+      </select>
+      <label for="just-con-{{id}}">Justificativa</label>
+      <textarea id="just-con-{{id}}" name="justificativa" maxlength="500" rows="2" required></textarea>
+      <button class="botao" type="submit">Registrar decisão</button>
+    </form>
+  </article>
+  {{/contestacoes}}
+  {{^contestacoes}}<p class="vazio">Nenhuma contestação aberta.</p>{{/contestacoes}}
+</section>
+
+<section aria-labelledby="reservas-titulo">
+  <h2 id="reservas-titulo">Reservas em mediação</h2>
+  {{#reservasAnalise}}
+  <article class="cartao">
+    <p class="etiqueta">{{statusLabel}} · {{periodo}}</p>
+    <h3>{{solicitacaoTitulo}}</h3>
+    <p class="dica">{{assistidoNome}} · {{apoiadorNome}} · {{local}}</p>
+    {{#ocorrencia}}<p class="aviso atencao">Ocorrência: {{ocorrencia}}</p>{{/ocorrencia}}
+    <form class="formulario compacto" method="post" action="/mediacao/reservas/{{id}}/decisao">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="decisao-res-{{id}}">Decisão</label>
+      <select id="decisao-res-{{id}}" name="decisao">
+        <option value="concluir">Concluir o apoio</option>
+        <option value="cancelar">Cancelar e reabrir a solicitação</option>
+      </select>
+      <label for="motivo-res-{{id}}">Motivo</label>
+      <input id="motivo-res-{{id}}" name="motivo" maxlength="500" required>
+      <button class="botao" type="submit">Registrar decisão</button>
+    </form>
+  </article>
+  {{/reservasAnalise}}
+  {{^reservasAnalise}}<p class="vazio">Nenhuma reserva em mediação.</p>{{/reservasAnalise}}
+</section>
+
+<section aria-labelledby="sancoes-titulo">
+  <h2 id="sancoes-titulo">Sanções registradas</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Usuário</th><th>Tipo</th><th>Status</th><th>Início</th><th>Fim</th><th>Motivo</th></tr></thead>
+      <tbody>
+      {{#sancoes}}
+      <tr><td>{{usuario}}</td><td>{{tipo}}</td><td>{{status}}</td><td>{{inicio}}</td><td>{{fim}}</td><td>{{motivo}}</td></tr>
+      {{/sancoes}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cartao" aria-labelledby="ocultar-titulo">
+  <h2 id="ocultar-titulo">Ocultar conteúdo</h2>
+  <form class="formulario compacto" method="post" action="/mediacao/ocultar">
+    <input type="hidden" name="csrf" value="{{csrf}}">
+    <label for="tipo-ocultar">Tipo de conteúdo</label>
+    <select id="tipo-ocultar" name="tipo">
+      <option value="mensagem">Mensagem de chat</option>
+      <option value="avaliacao">Avaliação</option>
+      <option value="solicitacao">Solicitação</option>
+    </select>
+    <label for="id-ocultar">Identificador</label>
+    <input id="id-ocultar" name="id" required>
+    <label for="motivo-ocultar">Motivo</label>
+    <input id="motivo-ocultar" name="motivo" maxlength="500" required>
+    <button class="botao perigo" type="submit">Ocultar conteúdo</button>
+  </form>
+</section>
+{{>footer}}

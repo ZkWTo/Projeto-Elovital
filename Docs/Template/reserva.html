@@ -1,0 +1,116 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">{{reserva.statusLabel}}</p>
+  <h1>{{reserva.solicitacaoTitulo}}</h1>
+  <p>{{reserva.periodo}} · {{reserva.local}} · {{reserva.modalidade}}</p>
+  <p class="dica">Assistido: {{reserva.assistidoNome}} · Apoiador: {{reserva.apoiadorNome}}</p>
+</section>
+
+<section class="grade duas">
+  <article class="cartao">
+    <h2>Andamento</h2>
+    <p>Ciência do Assistido: {{#reserva.confirmacaoAssistido}}registrada{{/reserva.confirmacaoAssistido}}{{^reserva.confirmacaoAssistido}}pendente{{/reserva.confirmacaoAssistido}}</p>
+    <p>Ciência do Apoiador: {{#reserva.confirmacaoApoiador}}registrada{{/reserva.confirmacaoApoiador}}{{^reserva.confirmacaoApoiador}}pendente{{/reserva.confirmacaoApoiador}}</p>
+    {{#reserva.motivoCancelamento}}<p>Motivo do cancelamento: {{reserva.motivoCancelamento}}</p>{{/reserva.motivoCancelamento}}
+    {{#reserva.ocorrencia}}<p class="aviso atencao">Ocorrência: {{reserva.ocorrencia}}</p>{{/reserva.ocorrencia}}
+    <p class="dica">A reserva existe desde a criação; a ciência em 24 h não é aceite.</p>
+  </article>
+  <article class="cartao">
+    <h2>Ações</h2>
+    {{#reserva.cienciaPendente}}
+    <form method="post" action="/reservas/{{reserva.id}}/ciencia">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="botao" type="submit">Registrar ciência</button>
+    </form>
+    {{/reserva.cienciaPendente}}
+
+    {{#reserva.podeRealizar}}
+    <form method="post" action="/reservas/{{reserva.id}}/realizacao">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="botao" type="submit">Registrar que o apoio aconteceu</button>
+    </form>
+    {{/reserva.podeRealizar}}
+
+    {{#reserva.podeConfirmar}}
+    <form method="post" action="/reservas/{{reserva.id}}/confirmacoes">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="botao" type="submit">Confirmar conclusão</button>
+    </form>
+    {{/reserva.podeConfirmar}}
+
+    {{#reserva.ativa}}
+    <details>
+      <summary>Cancelar reserva</summary>
+      <form method="post" action="/reservas/{{reserva.id}}/cancelar">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="motivo-cancelar">Motivo</label>
+        <input id="motivo-cancelar" name="motivo" maxlength="500" required>
+        <p class="dica">Com menos de 24 h, o horário fica bloqueado e a mediação decide.</p>
+        <button class="botao perigo" type="submit">Confirmar cancelamento</button>
+      </form>
+    </details>
+    {{/reserva.ativa}}
+
+    <p><a class="botao secundario" href="/reservas/{{reserva.id}}/chat">Abrir chat</a></p>
+    <p><a href="/denuncias/nova?alvo={{reserva.outraParteId}}&reserva={{reserva.id}}">Denunciar {{reserva.outraParteNome}}</a></p>
+  </article>
+</section>
+
+<section class="grade duas">
+  <article class="cartao">
+    <h2>Dupla confirmação</h2>
+    <p>O apoio só é concluído quando as duas partes confirmam. Após 72 h, a rotina conclui com uma confirmação e sinaliza a ocorrência.</p>
+    {{#reserva.podeConfirmar}}
+    <form method="post" action="/reservas/{{reserva.id}}/discordar">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="ocorrencia">Discordar da conclusão</label>
+      <input id="ocorrencia" name="ocorrencia" maxlength="500" required>
+      <button class="botao perigo" type="submit">Registrar discordância</button>
+    </form>
+    {{/reserva.podeConfirmar}}
+  </article>
+  <article class="cartao">
+    <h2>Remarcar ou registrar falta</h2>
+    {{#reserva.ativa}}
+    <form method="post" action="/reservas/{{reserva.id}}/remarcar">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <label for="novo-horario">Novo horário</label>
+      <select id="novo-horario" name="horarioId" required>
+        {{#horarios}}<option value="{{id}}">{{periodo}} · {{apoiadorNome}}</option>{{/horarios}}
+      </select>
+      <button class="botao" type="submit">Remarcar</button>
+    </form>
+    <form method="post" action="/reservas/{{reserva.id}}/falta">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button class="link" type="submit">Registrar não comparecimento</button>
+    </form>
+    {{/reserva.ativa}}
+  </article>
+</section>
+
+{{#reserva.podeAvaliar}}
+<section class="cartao" aria-labelledby="avaliar-titulo">
+  <h2 id="avaliar-titulo">Avaliar o apoio</h2>
+  <form method="post" action="/reservas/{{reserva.id}}/avaliacao">
+    <input type="hidden" name="csrf" value="{{csrf}}">
+    <label for="nota">Nota de 1 a 5</label>
+    <input id="nota" name="nota" type="number" min="1" max="5" required>
+    <label for="comentario">Comentário (até 300 caracteres)</label>
+    <textarea id="comentario" name="comentario" maxlength="300" rows="3"></textarea>
+    <button class="botao" type="submit">Enviar avaliação</button>
+  </form>
+</section>
+{{/reserva.podeAvaliar}}
+{{#reserva.jaAvaliou}}<p class="dica">Você já avaliou esta reserva.</p>{{/reserva.jaAvaliou}}
+
+<section aria-labelledby="avaliacoes-titulo">
+  <h2 id="avaliacoes-titulo">Avaliações da reserva</h2>
+  {{#avaliacoes}}
+  <article class="cartao">
+    <p class="etiqueta">Nota {{nota}} · {{autorNome}} · {{criadaEm}}</p>
+    <p>{{comentario}}</p>
+  </article>
+  {{/avaliacoes}}
+  {{^avaliacoes}}<p class="vazio">Nenhuma avaliação.</p>{{/avaliacoes}}
+</section>
+{{>footer}}

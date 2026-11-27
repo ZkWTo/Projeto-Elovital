@@ -1,0 +1,18 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Entrar</h1>
+  <p>Use o e-mail cadastrado. A conta precisa estar ativa após a análise da mediação.</p>
+</section>
+<form class="formulario cartao estreito" method="post" action="/entrar">
+  <input type="hidden" name="next" value="{{next}}">
+  <label for="email">E-mail</label>
+  <input id="email" name="email" type="email" value="{{email}}" required autocomplete="email">
+
+  <label for="senha">Senha</label>
+  <input id="senha" name="senha" type="password" required autocomplete="current-password">
+
+  <button class="botao grande" type="submit">Entrar</button>
+  <p class="dica"><a href="/esqueci-minha-senha">Esqueci minha senha</a> · <a href="/cadastro">Criar conta</a></p>
+  <p class="dica">Cinco falhas em quinze minutos bloqueiam temporariamente o acesso.</p>
+</form>
+{{>footer}}

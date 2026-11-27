@@ -1,0 +1,50 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Minha agenda solidária</h1>
+  <p>Horário reservado não pode ser editado; só cancelado ou remarcado. Datas passadas não são aceitas.</p>
+</section>
+
+<form class="formulario cartao" method="post" action="/agenda/horarios">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <h2>Publicar novo horário</h2>
+  <label for="data">Data</label>
+  <input id="data" name="data" type="date" required>
+  <label for="inicio">Início</label>
+  <input id="inicio" name="inicio" type="time" required>
+  <label for="fim">Fim</label>
+  <input id="fim" name="fim" type="time" required>
+  <label for="modalidade">Modalidade</label>
+  <select id="modalidade" name="modalidade">
+    <option value="PRESENCIAL">Presencial</option>
+    <option value="REMOTO">Remoto</option>
+    <option value="AMBOS">Presencial e remoto</option>
+  </select>
+  <label for="observacoes">Observações (até 200 caracteres)</label>
+  <textarea id="observacoes" name="observacoes" maxlength="200" rows="2"></textarea>
+  <button class="botao grande" type="submit">Publicar horário</button>
+</form>
+
+<section aria-labelledby="lista-titulo">
+  <h2 id="lista-titulo">Horários</h2>
+  {{#horarios}}
+  <article class="cartao horario">
+    <p class="etiqueta">{{statusLabel}} · {{modalidadeLabel}}</p>
+    <h3>{{periodo}}</h3>
+    <p>{{local}}</p>
+    {{#observacoes}}<p class="dica">{{observacoes}}</p>{{/observacoes}}
+    {{#disponivel}}
+    <details>
+      <summary>Bloquear horário</summary>
+      <form method="post" action="/agenda/horarios/{{id}}/bloquear">
+        <input type="hidden" name="csrf" value="{{csrf}}">
+        <label for="motivo-{{id}}">Justificativa</label>
+        <input id="motivo-{{id}}" name="motivo" maxlength="500" required>
+        <button class="botao perigo" type="submit">Bloquear</button>
+      </form>
+    </details>
+    {{/disponivel}}
+  </article>
+  {{/horarios}}
+  {{^horarios}}<p class="vazio">Nenhum horário publicado.</p>{{/horarios}}
+</section>
+{{>footer}}

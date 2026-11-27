@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>{{titulo}} · EloVital</title>
+  <link rel="stylesheet" href="/estilo.css">
+</head>
+<body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+<header class="topo">
+  <a class="marca" href="/">EloVital</a>
+  <nav aria-label="Navegação principal">
+  {{#logado}}
+    <a href="/painel">Painel</a>
+    {{#ehMediacao}}<a href="/mediacao">Mediação</a>{{/ehMediacao}}
+    <a href="/solicitacoes">Solicitações</a>
+    <a href="/apoiadores">Apoiadores</a>
+    <a href="/historico">Histórico</a>
+    <a href="/notificacoes">Notificações <span id="contador" class="selo">{{naoLidas}}</span></a>
+    <a href="/perfil">{{usuarioNome}}</a>
+    <form method="post" action="/sair" class="inline">
+      <input type="hidden" name="csrf" value="{{csrf}}">
+      <button type="submit" class="link">Sair</button>
+    </form>
+  {{/logado}}
+  {{^logado}}
+    <a href="/entrar">Entrar</a>
+    <a class="botao" href="/cadastro">Criar conta</a>
+  {{/logado}}
+  </nav>
+</header>
+<main id="conteudo" class="conteudo">
+{{#flash}}<p class="aviso ok" role="status">{{flash}}</p>{{/flash}}
+{{#erroFlash}}<p class="aviso erro" role="alert">{{erroFlash}}</p>{{/erroFlash}}
+{{#erro}}<p class="aviso erro" role="alert">{{erro}}</p>{{/erro}}

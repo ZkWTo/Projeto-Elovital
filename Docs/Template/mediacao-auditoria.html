@@ -1,0 +1,36 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <p class="etiqueta">Rastreabilidade</p>
+  <h1>Auditoria</h1>
+  <p>Registro append-only das ações relevantes e dos acessos a dados sensíveis.</p>
+</section>
+
+<section aria-labelledby="acoes-titulo">
+  <h2 id="acoes-titulo">Ações</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Quando</th><th>Ator</th><th>Ação</th><th>Entidade</th><th>Antes</th><th>Depois</th></tr></thead>
+      <tbody>
+      {{#auditoria}}
+      <tr><td>{{criadaEm}}</td><td>{{ator}}</td><td>{{acao}}</td><td>{{entidade}}</td><td>{{antes}}</td><td>{{depois}}</td></tr>
+      {{/auditoria}}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section aria-labelledby="acessos-titulo">
+  <h2 id="acessos-titulo">Acessos a dados sensíveis</h2>
+  <div class="tabela">
+    <table>
+      <thead><tr><th>Quando</th><th>Mediador</th><th>Alvo</th><th>Campo</th><th>Motivo</th></tr></thead>
+      <tbody>
+      {{#acessos}}
+      <tr><td>{{quando}}</td><td>{{mediador}}</td><td>{{alvo}}</td><td>{{campo}}</td><td>{{motivo}}</td></tr>
+      {{/acessos}}
+      </tbody>
+    </table>
+  </div>
+  {{^acessos}}<p class="vazio">Nenhum acesso sensível registrado.</p>{{/acessos}}
+</section>
+{{>footer}}

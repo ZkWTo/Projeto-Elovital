@@ -1,0 +1,32 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Verificação de identidade</h1>
+  <p>Documento e selfie ficam em armazenamento privado e são expurgados após o prazo de retenção.</p>
+</section>
+
+<form class="formulario cartao estreito" method="post" action="/verificacao">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <label for="tipo">Tipo de documento</label>
+  <select id="tipo" name="tipo">
+    <option value="DOCUMENTO">Documento de identidade</option>
+    <option value="SELFIE">Selfie</option>
+    <option value="REGISTRO_PROFISSIONAL">Registro profissional</option>
+  </select>
+  <label for="arquivo">Arquivo (PDF, JPG ou PNG, até 5 MB)</label>
+  <input id="arquivo" name="arquivo" placeholder="nome-do-arquivo.pdf" required>
+  <p class="dica">Neste protótipo o upload é representado pelo nome do arquivo; o bucket é privado.</p>
+  <button class="botao grande" type="submit">Enviar para análise</button>
+</form>
+
+<section aria-labelledby="docs-titulo">
+  <h2 id="docs-titulo">Meus envios</h2>
+  {{#documentos}}
+  <article class="cartao">
+    <p class="etiqueta">{{tipo}} · {{statusLabel}}</p>
+    <p class="dica">Enviado em {{enviadoEm}}</p>
+    {{#justificativa}}<p>Justificativa: {{justificativa}}</p>{{/justificativa}}
+  </article>
+  {{/documentos}}
+  {{^documentos}}<p class="vazio">Nenhum documento enviado.</p>{{/documentos}}
+</section>
+{{>footer}}

@@ -1,0 +1,29 @@
+{{>header}}
+<section class="cabecalho-pagina">
+  <h1>Chat da reserva</h1>
+  <p>{{reserva.periodo}} · {{reserva.statusLabel}}</p>
+  <p class="dica">Texto puro, sem anexos. Telefone, links e pedidos de dinheiro são alertados ou bloqueados.</p>
+</section>
+
+<section class="chat" aria-label="Mensagens" aria-live="polite">
+  {{#mensagens}}
+  <article class="mensagem {{#minha}}minha{{/minha}}">
+    <p class="etiqueta">{{autorNome}} · {{criadaEm}}</p>
+    <p class="texto">{{texto}}</p>
+    {{#oculta}}<p class="dica">Conteúdo ocultado pela mediação.{{#motivo}} Motivo: {{motivo}}{{/motivo}}</p>{{/oculta}}
+  </article>
+  {{/mensagens}}
+  {{^mensagens}}<p class="vazio">Nenhuma mensagem ainda. Comece pelo objetivo do apoio.</p>{{/mensagens}}
+</section>
+
+<form class="formulario cartao" method="post" action="/reservas/{{reserva.id}}/chat">
+  <input type="hidden" name="csrf" value="{{csrf}}">
+  <label for="texto">Mensagem (até 1.000 caracteres)</label>
+  <textarea id="texto" name="texto" maxlength="1000" rows="4" required></textarea>
+  <button class="botao" type="submit">Enviar mensagem</button>
+</form>
+
+<p><a class="botao secundario" href="/reservas/{{reserva.id}}">Voltar à reserva</a></p>
+
+<div data-evento-chat="{{reserva.id}}" hidden></div>
+{{>footer}}
